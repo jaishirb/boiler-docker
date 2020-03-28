@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from django.conf import settings
 from rest_framework.routers import DefaultRouter
 from rest_framework_swagger.views import get_swagger_view
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 
@@ -14,5 +15,5 @@ urlpatterns = [
       url(r'^{}auth/'.format(PREFIX_URL), include('rest_auth.urls')),
       url(r'^{}$'.format(PREFIX_URL), schema_view),
       url(r'^{}api/'.format(PREFIX_URL), include(router.urls)),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
